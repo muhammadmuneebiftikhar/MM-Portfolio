@@ -14,6 +14,34 @@ import { useState } from 'react';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<'all' | 'enterprise' | 'web'>('all');
+  const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState),
+      });
+
+      if (res.ok) {
+        setSubmitStatus('success');
+        setFormState({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (err) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -101,7 +129,7 @@ export default function Home() {
 
                 <TextReveal
                   text="MUHAMMAD MUNEEB."
-                  className="text-[10vw] md:text-[9vw] font-black leading-[0.8] tracking-tighter uppercase font-space mb-8"
+                  className="text-[10vw] md:text-[9vw] font-black leading-[0.8] tracking-tighter uppercase font-space mb-8 text-shadow-glow"
                   wordSpace="mr-4 md:mr-8"
                 />
 
@@ -324,50 +352,104 @@ export default function Home() {
             </motion.div>
           </SectionReveal>
 
-          {/* CONTACT SECTION */}
-          <SectionReveal id="contact" className="px-6 md:px-24 max-w-7xl mx-auto text-center py-32 snap-section">
-            <h2 className="text-orange text-xs font-bold tracking-[0.5em] uppercase mb-12">Let's Connect</h2>
-            <motion.div
-              whileHover={{ scale: 0.98 }}
-              className="text-[10vw] md:text-[8vw] font-black tracking-tighter uppercase cursor-pointer mix-blend-difference leading-[0.8]"
-            >
-              SAY <span className="text-outline">HELLO</span><span className="text-orange">.</span>
-            </motion.div>
-
-            <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/5 pt-20">
-              <a href="mailto:muneebiftikhar382@gmail.com" className="flex flex-col items-center group">
-                <Mail className="w-8 h-8 text-orange mb-6 group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Direct Mail</span>
-                <span className="text-lg font-bold group-hover:text-orange transition-colors">muneebiftikhar382@gmail.com</span>
-              </a>
-              <div className="flex flex-col items-center group">
-                <Phone className="w-8 h-8 text-orange mb-6 group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">WhatsApp / Call</span>
-                <span className="text-lg font-bold group-hover:text-orange transition-colors">+971 56 838 6300</span>
-              </div>
-              <div className="flex flex-col items-center group">
-                <MapPin className="w-8 h-8 text-orange mb-6 group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Based In</span>
-                <span className="text-lg font-bold group-hover:text-orange transition-colors">Dubai, UAE</span>
-              </div>
+          {/* CONTACT SECTION - NEW REDESIGN */}
+          <SectionReveal id="contact" className="px-6 md:px-24 max-w-7xl mx-auto py-40 snap-section">
+            <div className="text-center mb-24">
+              <h2 className="text-7xl md:text-[12vw] font-black tracking-tighter leading-[0.8] uppercase font-space flex flex-col items-center">
+                <span>LET'S</span>
+                <span className="text-outline">CREATE</span>
+                <span className="text-orange text-shadow-glow">TOGETHER</span>
+              </h2>
             </div>
 
-            <div className="mt-32 flex justify-center gap-12">
+            {/* Social Contact Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
               {[
-                { name: 'LinkedIn', url: 'https://www.linkedin.com/in/muhammad--muneeb/' },
-                { name: 'GitHub', url: 'https://github.com/muhammadmuneebiftikhar/' }
-              ].map((platform) => (
-                <Magnetic key={platform.name}>
-                  <a 
-                    href={platform.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-xs font-black uppercase tracking-widest text-foreground/40 hover:text-orange transition-colors"
-                  >
-                    {platform.name}
-                  </a>
-                </Magnetic>
+                { label: 'EMAIL ME', val: 'muneebiftikhar382@gmail.com', link: 'mailto:muneebiftikhar382@gmail.com' },
+                { label: 'PHONE', val: '+92 318 7680511', link: 'tel:+923187680511' },
+                { label: 'LINKEDIN', val: '/in/muhammad--muneeb', link: 'https://www.linkedin.com/in/muhammad--muneeb/' },
+                { label: 'GITHUB', val: '/muhammadmuneebiftikhar', link: 'https://github.com/muhammadmuneebiftikhar/' }
+              ].map((card, i) => (
+                <a key={i} href={card.link} target="_blank" rel="noopener noreferrer" className="group p-8 border border-white/5 bg-white/[0.01] rounded-xl hover:border-orange/20 hover:bg-white/[0.03] transition-all">
+                  <span className="block text-[8px] font-black tracking-[0.4em] uppercase text-foreground/30 mb-4">{card.label}</span>
+                  <span className="block text-sm font-bold tracking-tight mb-6 truncate group-hover:text-orange transition-colors">{card.val}</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-orange flex items-center gap-2">
+                    OPEN <ExternalLink className="w-3 h-3" />
+                  </span>
+                </a>
               ))}
+            </div>
+
+            {/* MESSAGE FORM */}
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-12">
+                <span className="text-[10px] font-black tracking-[0.5em] uppercase text-foreground/20">OR SEND A MESSAGE</span>
+              </div>
+
+              <form onSubmit={handleFormSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <input 
+                      type="text" 
+                      placeholder="NAME"
+                      required
+                      value={formState.name}
+                      onChange={e => setFormState({...formState, name: e.target.value})}
+                      className="w-full bg-white/[0.02] border border-white/5 rounded-none p-5 text-xs font-bold tracking-widest focus:border-orange/50 outline-none transition-colors"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <input 
+                      type="email" 
+                      placeholder="EMAIL"
+                      required
+                      value={formState.email}
+                      onChange={e => setFormState({...formState, email: e.target.value})}
+                      className="w-full bg-white/[0.02] border border-white/5 rounded-none p-5 text-xs font-bold tracking-widest focus:border-orange/50 outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+                
+                <input 
+                  type="text" 
+                  placeholder="SUBJECT (OPTIONAL)"
+                  value={formState.subject}
+                  onChange={e => setFormState({...formState, subject: e.target.value})}
+                  className="w-full bg-white/[0.02] border border-white/5 rounded-none p-5 text-xs font-bold tracking-widest focus:border-orange/50 outline-none transition-colors"
+                />
+
+                <textarea 
+                  placeholder="YOUR MESSAGE"
+                  rows={6}
+                  required
+                  value={formState.message}
+                  onChange={e => setFormState({...formState, message: e.target.value})}
+                  className="w-full bg-white/[0.02] border border-white/5 rounded-none p-5 text-xs font-bold tracking-widest focus:border-orange/50 outline-none transition-colors resize-none"
+                />
+
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-6 bg-orange text-black font-black uppercase tracking-[0.3em] text-xs hover:bg-orange/90 transition-all shadow-[0_0_30px_rgba(255,109,0,0.2)] disabled:opacity-50"
+                >
+                  {isSubmitting ? 'TRANSMITTING...' : 'SEND TRANSMISSION'}
+                </button>
+
+                {submitStatus === 'success' && (
+                  <p className="text-orange text-[10px] font-bold tracking-widest uppercase text-center mt-4">Transmission Sent Successfully.</p>
+                )}
+                {submitStatus === 'error' && (
+                  <p className="text-red-500 text-[10px] font-bold tracking-widest uppercase text-center mt-4">Failed to initialize transmission. Please try again.</p>
+                )}
+              </form>
+
+              <div className="mt-32 text-center">
+                <span className="text-[9px] font-black tracking-[0.5em] uppercase text-orange/40 flex items-center justify-center gap-4">
+                  <span className="w-1 h-1 rounded-full bg-orange shadow-[0_0_8px_orange] animate-pulse" />
+                  CURRENTLY ACCEPTING NEW PROJECTS
+                  <span className="w-1 h-1 rounded-full bg-orange shadow-[0_0_8px_orange] animate-pulse" />
+                </span>
+              </div>
             </div>
           </SectionReveal>
 

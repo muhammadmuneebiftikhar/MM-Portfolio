@@ -20,12 +20,12 @@ export default function TextReveal({ text, className, delay = 0, wordSpace = "mr
       transition: { 
         staggerChildren: 0.12, 
         delayChildren: delay * i,
-        ease: [0.2, 0.65, 0.3, 0.9],
+        ease: [0.2, 0.65, 0.3, 0.9] as any,
       },
     }),
   };
 
-  const child = {
+  const child: any = {
     visible: {
       opacity: 1,
       y: 0,
