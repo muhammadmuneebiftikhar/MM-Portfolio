@@ -176,8 +176,9 @@ export default function Home() {
               </div>
 
               <motion.a
-                href="Muhammad_Muneeb - Frontend Software Engineer.pdf"
-                download="Muhammad_Muneeb - Frontend Software Engineer.pdf"
+                href="https://drive.google.com/file/d/1mOxrYBPY5BvxuUrE7l4og_l519oTtvfW/view?usp=sharing"
+                // download="Muhammad_Muneeb - Frontend Software Engineer.pdf"
+                target="_blank"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-3 px-8 py-4 bg-orange text-black font-black text-xs uppercase tracking-[0.2em] rounded-md hover:shadow-[0_0_30px_rgba(255,109,0,0.4)] transition-all cursor-pointer"
