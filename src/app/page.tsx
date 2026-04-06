@@ -132,64 +132,63 @@ export default function Home() {
           </section>
 
           {/* ABOUT SECTION */}
-          <SectionReveal id="about" className="px-6 md:px-24 max-w-7xl mx-auto py-32 snap-section overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+          <SectionReveal id="about" className="px-6 md:px-24 max-w-7xl mx-auto py-32 snap-section overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
 
-              {/* Left Column: Digital Avatar replacement */}
-              <div className="lg:col-span-5 relative group">
-                <div className="aspect-square w-full max-w-md mx-auto">
-                  <DigitalCore />
-                </div>
-              </div>
-
-              {/* Right Column: Bio & Tech */}
-              <div className="lg:col-span-7">
-                <h2 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.8] uppercase font-space mb-4">
-                  THE <br /><span className="text-outline">DEVELOPER</span>
-                </h2>
-                <p className="text-orange italic font-bold text-lg mb-8 tracking-wide">Behind the work</p>
-
-                <p className="text-foreground/60 text-base md:text-lg leading-relaxed mb-10 max-w-xl">
-                  I'm a full-stack developer and creative technologist with 4+ years of experience turning ideas into immersive digital experiences. I specialize in building performance-driven, high-traffic platforms that push the boundaries of modern web standards.
-                </p>
-
-                <div className="pl-6 border-l-4 border-orange mb-12">
-                  <p className="text-xl md:text-2xl font-bold tracking-tight text-foreground/90 italic">
-                    "I don't just build interfaces.<br />
-                    I build entire digital worlds."
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                  {[
-                    { label: 'React / Next.js', status: 'Expert' },
-                    { label: 'Node.js / Express', status: 'Advanced' },
-                    { label: 'TypeScript / JS (ES6+)', status: 'Master' },
-                    { label: 'Three.js / WebGL', status: 'Specialist' },
-                    { label: 'Vue / Nuxt 3', status: 'Expert' },
-                    { label: 'PostgreSQL / MongoDB', status: 'Advanced' }
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 p-4 border border-white/5 bg-white/[0.02] rounded-xl group hover:border-orange/20 transition-colors cursor-default">
-                      <div className="w-2 h-2 rounded-full bg-orange shadow-[0_0_10px_rgba(255,109,0,0.8)] animate-pulse" />
-                      <span className="text-[10px] font-black uppercase tracking-widest text-foreground/70 group-hover:text-foreground transition-colors">{item.label}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <motion.a
-                  href="/resume.pdf"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-orange text-black font-black text-xs uppercase tracking-[0.2em] rounded-md hover:shadow-[0_0_30px_rgba(255,109,0,0.4)] transition-all cursor-pointer"
-                >
-                  <Download className="w-4 h-4" />
-                  Download CV
-                </motion.a>
+            {/* Left Column: Digital Avatar replacement */}
+            <div className="lg:col-span-5 relative group">
+              <div className="aspect-square w-full max-w-md mx-auto">
+                <DigitalCore />
               </div>
             </div>
 
+            {/* Right Column: Bio & Tech */}
+            <div className="lg:col-span-7">
+              <h2 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.8] uppercase font-space mb-4">
+                THE <br /><span className="text-outline">DEVELOPER</span>
+              </h2>
+              <p className="text-orange italic font-bold text-lg mb-8 tracking-wide">Behind the work</p>
+
+              <p className="text-foreground/60 text-base md:text-lg leading-relaxed mb-10 max-w-xl">
+                I'm a full-stack developer and creative technologist with 4+ years of experience turning ideas into immersive digital experiences. I specialize in building performance-driven, high-traffic platforms that push the boundaries of modern web standards.
+              </p>
+
+              <div className="pl-6 border-l-4 border-orange mb-12">
+                <p className="text-xl md:text-2xl font-bold tracking-tight text-foreground/90 italic">
+                  "I don't just build interfaces.<br />
+                  I build entire digital worlds."
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                {[
+                  { label: 'React / Next.js', status: 'Expert' },
+                  { label: 'Node.js / Express', status: 'Advanced' },
+                  { label: 'TypeScript / JS (ES6+)', status: 'Master' },
+                  { label: 'Three.js / WebGL', status: 'Specialist' },
+                  { label: 'Vue / Nuxt 3', status: 'Expert' },
+                  { label: 'PostgreSQL / MongoDB', status: 'Advanced' }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 p-4 border border-white/5 bg-white/[0.02] rounded-xl group hover:border-orange/20 transition-colors cursor-default">
+                    <div className="w-2 h-2 rounded-full bg-orange shadow-[0_0_10px_rgba(255,109,0,0.8)] animate-pulse" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-foreground/70 group-hover:text-foreground transition-colors">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              <motion.a
+                href="Muhammad_Muneeb - Frontend Software Engineer.pdf"
+                download="Muhammad_Muneeb - Frontend Software Engineer.pdf"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-orange text-black font-black text-xs uppercase tracking-[0.2em] rounded-md hover:shadow-[0_0_30px_rgba(255,109,0,0.4)] transition-all cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                Download CV
+              </motion.a>
+            </div>
+
             {/* Bottom Stats Row */}
-            <div className="mt-40 grid grid-cols-2 md:grid-cols-4 gap-12 border-t border-white/5 pt-20">
+            <div className="lg:col-span-12 mt-40 grid grid-cols-2 md:grid-cols-4 gap-12 border-t border-white/5 pt-20">
               {[
                 { label: 'Years', val: '4+', sub: 'Experience' },
                 { label: 'Projects', val: '50+', sub: 'Completed' },
@@ -205,46 +204,40 @@ export default function Home() {
           </SectionReveal>
 
           {/* EXPERIENCE SECTION */}
-          <SectionReveal id="experience" className="px-6 md:px-24 max-w-7xl mx-auto py-32 snap-section">
-            <h2 className="text-orange text-[10px] font-bold tracking-[0.5em] uppercase mb-12">Journey</h2>
-            <div className="flex flex-col space-y-12 max-w-4xl">
-              {[
-                {
-                  company: 'Marhaba Group',
-                  role: 'Frontend Software Engineer',
-                  period: 'Dec 2023 – Present',
-                  description: 'Led architecture for large-scale real-time auction platforms. Built live bidding workflows and complex analytics dashboards.'
-                },
-                {
-                  company: 'Computer Data Shred',
-                  role: 'Full Stack Engineer',
-                  period: '2022 – 2023',
-                  description: 'Optimized Core Web Vitals and SEO structure. Built high-performance, mobile-first UI components for the UK market.'
-                },
-                {
-                  company: 'BXTrack Solutions',
-                  role: 'Software Engineer',
-                  period: '2021 – 2023',
-                  description: 'Translated Figma designs into modular React/Vue components. Owned frontend delivery in various Agile environments.'
-                }
-              ].map((job, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.5 }}
-                  className="group p-8 border border-white/10 rounded-[2rem] hover:bg-white/[0.03] transition-all duration-500"
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <h4 className="text-xl font-black uppercase tracking-tighter">{job.company}</h4>
-                    <span className="text-[10px] font-bold text-orange uppercase tracking-widest">{job.period}</span>
-                  </div>
-                  <p className="text-sm font-bold text-foreground/40 uppercase tracking-widest mb-4">{job.role}</p>
-                  <p className="text-sm text-foreground/60 leading-relaxed">{job.description}</p>
-                </motion.div>
-              ))}
-            </div>
+          <SectionReveal id="experience" className="px-6 md:px-24 max-w-7xl mx-auto py-32 snap-section flex flex-col space-y-12">
+            <h2 className="text-orange text-[10px] font-bold tracking-[0.5em] uppercase mb-0">Journey</h2>
+            {[
+              {
+                company: 'Marhaba Group',
+                role: 'Frontend Software Engineer',
+                period: 'Dec 2023 – Present',
+                description: 'Led architecture for large-scale real-time auction platforms. Built live bidding workflows and complex analytics dashboards.'
+              },
+              {
+                company: 'Computer Data Shred',
+                role: 'Full Stack Engineer',
+                period: '2022 – 2023',
+                description: 'Optimized Core Web Vitals and SEO structure. Built high-performance, mobile-first UI components for the UK market.'
+              },
+              {
+                company: 'BXTrack Solutions',
+                role: 'Software Engineer',
+                period: '2021 – 2023',
+                description: 'Translated Figma designs into modular React/Vue components. Owned frontend delivery in various Agile environments.'
+              }
+            ].map((job, idx) => (
+              <div
+                key={idx}
+                className="max-w-4xl group p-8 border border-white/10 rounded-[2rem] hover:bg-white/[0.03] transition-all duration-500"
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <h4 className="text-xl font-black uppercase tracking-tighter">{job.company}</h4>
+                  <span className="text-[10px] font-bold text-orange uppercase tracking-widest">{job.period}</span>
+                </div>
+                <p className="text-sm font-bold text-foreground/40 uppercase tracking-widest mb-4">{job.role}</p>
+                <p className="text-sm text-foreground/60 leading-relaxed">{job.description}</p>
+              </div>
+            ))}
           </SectionReveal>
 
           {/* PROJECTS SECTION */}
@@ -399,8 +392,8 @@ export default function Home() {
               </div>
             </div>
           </footer>
-        </div>
-      </SkewContainer>
-    </div>
+        </div >
+      </SkewContainer >
+    </div >
   );
 }

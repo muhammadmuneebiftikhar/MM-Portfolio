@@ -1,7 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { ReactNode, useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface SectionRevealProps {
   children: ReactNode;
@@ -11,20 +17,39 @@ interface SectionRevealProps {
 }
 
 export default function SectionReveal({ children, className, delay = 0, id }: SectionRevealProps) {
+  const container = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!container.current) return;
+
+      const elements = gsap.utils.toArray(container.current.children);
+
+      gsap.set(elements, {
+        y: 100,
+        opacity: 0,
+      });
+
+      ScrollTrigger.create({
+        trigger: container.current,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse',
+        animation: gsap.to(elements, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          delay: delay,
+          ease: 'power3.out',
+        }),
+      });
+    },
+    { scope: container }
+  );
+
   return (
-    <motion.div
-      id={id}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ 
-        duration: 0.8, 
-        delay, 
-        ease: [0.215, 0.61, 0.355, 1] 
-      }}
-      className={className}
-    >
+    <div id={id} ref={container} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }
